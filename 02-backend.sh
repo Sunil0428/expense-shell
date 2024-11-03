@@ -38,8 +38,15 @@ VALIDATE $? "Enabling nodejs 20"
 dnf install nodejs -y &>> $FILENAME
 VALIDATE $? "Installing nodejs 20"
 
-useradd expense &>> $FILENAME
-VALIDATE $? "Adding expense user"
+EXPENSEUSERID=$(id expense -u)
+
+if [ $? -ne 0 ]
+then
+    useradd expense &>> $FILENAME
+    VALIDATE $? "Adding expense user"
+else
+    echo "expene user is already there in the system"
+fi
 
 mkdir -p /app &>> $FILENAME
 VALIDATE $? "Creating app dir"
