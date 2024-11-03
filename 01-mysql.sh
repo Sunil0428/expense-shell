@@ -17,38 +17,40 @@ CHECKUSER()
 VALIDATE()
     if [ $1 -eq 0 ]
     then
-        echo -e "$2 is $G SUCCESS $N" | tee -a FILENAME
+        echo -e "$2 is $G SUCCESS $N" | tee -a $FILENAME
     else
-        echo -e  "$2 is $R FAILED $N" | tee -a FILENAME
+        echo -e  "$2 is $R FAILED $N" | tee -a $FILENAME
     fi
 
 USERID=$(id -u)
 
 CHECKUSER $USERID
 
-dnf list installed mysql
+dnf list installed mysql &>> $FILENAME
 if [ $? -ne 0 ]
 then
-    echo -e "$R mysql is not there in the system, hence installing $N" | tee -a FILENAME
+    echo -e "$R mysql is not there in the system, hence installing $N" | tee -a $FILENAME
     dnf install mysql -y &>>FILENAME
     VALIDATE $? "Installing mysql"
+else
+    echo -e "$R mysql alrdy there in the system, nothing to do $N" | tee -a $FILENAME
 fi
 
-systemctl enable mysqld | tee -a FILENAME
+systemctl enable mysqld &>>FILENAME
 VALIDATE $? "enabling mysql"
 
-systemctl start mysqld | tee -a FILENAME
+systemctl start mysqld &>>FILENAME
 VALIDATE $? "staring mysql"
 
-mysql -h 54.235.31.231 -u root -pExpenseApp@1 | tee -a FILENAME
+mysql -h 54.235.31.231 -u root -pExpenseApp@1 &>>FILENAME
 
 if [ $? -ne 0 ]
 then
-    echo -e "$R mysql root password is setting $N" | tee -a FILENAME
+    echo -e "$R mysql root password is setting $N" | tee -a $FILENAME
     mysql_secure_installation --set-root-pass ExpenseApp@1
     VALIDATE $? "setting mysql root password"
 else    
-    echo -e "$R mysql root password is alrdy set $N" | tee -a FILENAME
+    echo -e "$R mysql root password is alrdy set $N" | tee -a $FILENAME
 fi
 
 
