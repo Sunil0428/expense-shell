@@ -79,3 +79,10 @@ systemctl start backend  &>> $FILENAME
 VALIDATE $? "start backend service"
 systemctl enable backend &>> $FILENAME
 VALIDATE $? "enable backend service"
+
+dnf install mysql -y  &>> $FILENAME
+VALIDATE $? "installing mysql"
+
+mysql -h 54.235.31.231 -uroot -pExpenseApp@1 < /app/schema/backend.sql  &>> $FILENAME
+VALIDATE $? "running the backend sql in mysql server"
+
