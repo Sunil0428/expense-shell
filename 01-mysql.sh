@@ -28,7 +28,8 @@ USERID=$(id -u)
 CHECKUSER $USERID
 
 mkdir -p $LOGPATH
-mysql --version &>> $FILENAME
+
+dnf install mysql -y &>> $FILENAME
 
 if [ $? -ne 0 ]
 then
