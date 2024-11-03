@@ -29,12 +29,12 @@ CHECKUSER $USERID
 
 mkdir -p $LOGPATH
 
-dnf install mysql -y &>> $FILENAME
+dnf install mysql-server -y &>> $FILENAME
 
 if [ $? -ne 0 ]
 then
     echo -e "$R mysql is not there in the system, hence installing $N" | tee -a $FILENAME
-    dnf install mysql -y &>> $FILENAME
+    dnf install mysql-server -y &>> $FILENAME
     VALIDATE $? "Installing mysql"
 else
     echo -e "$R mysql alrdy there in the system, nothing to do $N" | tee -a $FILENAME
