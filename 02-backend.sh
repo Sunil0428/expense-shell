@@ -56,13 +56,13 @@ VALIDATE $? "removing files in app dir"
 cd /app 
 VALIDATE $? "get into the app dir"
 
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip &>> $FILENAME
 VALIDATE $? "get the code into the app dir"
 
 npm install  &>> $FILENAME
 VALIDATE $? "npm installation"
 
-cp ./backend.service /etc/systemd/system/backend.service
+cp backend.service /etc/systemd/system/backend.service
 VALIDATE $? "copying service file"
 
 systemctl daemon-reload  &>> $FILENAME
