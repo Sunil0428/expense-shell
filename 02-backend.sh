@@ -3,9 +3,10 @@ SCRIPTNAME=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
 FILENAME="$LOGPATH/$SCRIPTNAME-$TIMESTAMP.log"
 
-R="\e[31m"
-G="\e[32m"
-N="\e[0m"
+R="\033[1;31m"
+G="\033[1;32m"
+Y="\033[1;33m"
+N="\033[0m"
 
 CHECKUSER()
     if [ $1 -ne 0 ]
@@ -45,7 +46,7 @@ then
     useradd expense &>> $FILENAME
     VALIDATE $? "Adding expense user"
 else
-    echo "expene user is already there in the system"
+    echo -e " $Y expene user is already there in the system $N"
 fi
 
 mkdir -p /app &>> $FILENAME
