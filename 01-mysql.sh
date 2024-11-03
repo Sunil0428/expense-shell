@@ -26,24 +26,24 @@ USERID=$(id -u)
 
 CHECKUSER $USERID
 
-mysql --version &>>$FILENAME
+mysql --version &>> $FILENAME
 
 if [ $? -ne 0 ]
 then
     echo -e "$R mysql is not there in the system, hence installing $N" | tee -a $FILENAME
-    dnf install mysql -y &>>$FILENAME
+    dnf install mysql -y &>> $FILENAME
     VALIDATE $? "Installing mysql"
 else
     echo -e "$R mysql alrdy there in the system, nothing to do $N" | tee -a $FILENAME
 fi
 
-systemctl enable mysqld &>>$FILENAME
+systemctl enable mysqld &>> $FILENAME
 VALIDATE $? "enabling mysql"
 
-systemctl start mysqld &>>$FILENAME
+systemctl start mysqld &>> $FILENAME
 VALIDATE $? "staring mysql"
 
-mysql -h 54.235.31.231 -u root -pExpenseApp@1 &>>FILENAME
+mysql -h 54.235.31.231 -u root -pExpenseApp@1 &>> $FILENAME
 
 if [ $? -ne 0 ]
 then
