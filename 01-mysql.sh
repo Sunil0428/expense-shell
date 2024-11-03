@@ -26,7 +26,8 @@ USERID=$(id -u)
 
 CHECKUSER $USERID
 
-dnf list installed mysql &>> $FILENAME
+mysql --version  &>> $FILENAME
+
 if [ $? -ne 0 ]
 then
     echo -e "$R mysql is not there in the system, hence installing $N" | tee -a $FILENAME
