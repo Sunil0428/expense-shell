@@ -39,10 +39,10 @@ else
     echo -e "$R mysql alrdy there in the system, nothing to do $N" | tee -a $FILENAME
 fi
 
-systemctl enable mysqld | tee -a $FILENAME
+systemctl enable mysql &>> $FILENAME
 VALIDATE $? "enabling mysql"
 
-systemctl start mysqld  | tee -a $FILENAME
+systemctl start mysql  &>> $FILENAME
 VALIDATE $? "staring mysql"
 
 mysql -h 54.235.31.231 -u root -pExpenseApp@1 &>> $FILENAME
