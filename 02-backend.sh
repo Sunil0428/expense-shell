@@ -61,7 +61,7 @@ VALIDATE $? "getting app code"
 rm -rf /app/* &>> $FILENAME
 VALIDATE $? "removing files in app dir"
 
-cd /app 
+cd /app   &>> $FILENAME
 VALIDATE $? "get into the app dir"
 
 unzip /tmp/backend.zip &>> $FILENAME
@@ -86,3 +86,5 @@ VALIDATE $? "installing mysql"
 mysql -h 54.235.31.231 -uroot -pExpenseApp@1 < /app/schema/backend.sql  &>> $FILENAME
 VALIDATE $? "running the backend sql in mysql server"
 
+systemctl restart backend
+VALIDATE $? "restart backend"
