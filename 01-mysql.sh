@@ -26,7 +26,7 @@ USERID=$(id -u)
 
 CHECKUSER $USERID
 
-mysql --version  &>> $FILENAME
+mysql --version 
 
 if [ $? -ne 0 ]
 then
