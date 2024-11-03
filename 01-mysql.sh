@@ -22,10 +22,12 @@ VALIDATE()
         echo -e  "$2 is $R FAILED $N" | tee -a $FILENAME
     fi
 
+
 USERID=$(id -u)
 
 CHECKUSER $USERID
 
+mkdir -p $LOGPATH
 mysql --version &>> $FILENAME
 
 if [ $? -ne 0 ]
