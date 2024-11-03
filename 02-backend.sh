@@ -62,7 +62,7 @@ VALIDATE $? "get the code into the app dir"
 npm install  &>> $FILENAME
 VALIDATE $? "npm installation"
 
-cp backend.service /etc/systemd/system/backend.service
+cp $PWD/backend.service /etc/systemd/system/backend.service
 VALIDATE $? "copying service file"
 
 systemctl daemon-reload  &>> $FILENAME
