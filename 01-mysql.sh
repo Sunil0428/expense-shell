@@ -10,7 +10,7 @@ N="\e[0m"
 CHECKUSER()
     if [ $1 -ne 0 ]
     then
-        echo "Please use the root user access to run this script"
+        echo -e "$R Please use the root user access to run this script $N"
         exit 1
     fi
 
